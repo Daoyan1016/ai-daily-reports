@@ -1,86 +1,345 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>AI·链·股·创 每日日报 — 2026-02-24</title><style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg: #0f1117; --surface: #1a1d27; --surface2: #22263a; --border: #2e3250; --accent-ai: #6c63ff; --accent-chain: #f59e0b; --accent-stock: #10b981; --accent-startup: #f43f5e; --text: #e8eaf6; --text-muted: #7c7fa8; --radius: 14px; --shadow: 0 4px 24px rgba(0,0,0,0.4); }
-    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif; line-height: 1.7; min-height: 100vh; }
-    a { color: inherit; text-decoration: none; }
-    .header { background: linear-gradient(135deg,#1a1d27 0%,#0f1117 100%); border-bottom: 1px solid var(--border); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-    .header-left h1 { font-size: 22px; font-weight: 700; background: linear-gradient(90deg,#6c63ff,#f59e0b,#10b981,#f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 1px; }
-    .header-left .date { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
-    .header-right { display: flex; gap: 12px; align-items: center; }
-    .cat-badge { padding: 4px 14px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; }
-    .cat-ai { background: rgba(108,99,255,0.18); color: #a5a0ff; border: 1px solid rgba(108,99,255,0.35); }
-    .cat-chain { background: rgba(245,158,11,0.18); color: #fcd34d; border: 1px solid rgba(245,158,11,0.35); }
-    .cat-stock { background: rgba(16,185,129,0.18); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.35); }
-    .cat-startup { background: rgba(244,63,94,0.18); color: #fda4af; border: 1px solid rgba(244,63,94,0.35); }
-    .container { max-width: 1100px; margin: 0 auto; padding: 36px 24px; }
-    .summary-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 36px; }
-    .summary-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; display: flex; align-items: center; gap: 14px; transition: transform 0.2s; }
-    .summary-card:hover { transform: translateY(-2px); }
-    .summary-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-    .icon-ai { background: rgba(108,99,255,0.18); } .icon-chain { background: rgba(245,158,11,0.18); } .icon-stock { background: rgba(16,185,129,0.18); } .icon-startup { background: rgba(244,63,94,0.18); }
-    .summary-info .label { font-size: 12px; color: var(--text-muted); }
-    .summary-info .value { font-size: 18px; font-weight: 700; margin-top: 2px; }
-    .section-title { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .market-bar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 28px; margin-bottom: 36px; display: flex; gap: 32px; overflow-x: auto; }
-    .market-item .name { font-size: 12px; color: var(--text-muted); }
-    .market-item .price { font-size: 18px; font-weight: 700; margin: 2px 0; }
-    .market-item .change { font-size: 13px; font-weight: 600; }
-    .change.up { color: #10b981; } .change.down { color: #f43f5e; }
-    .headline-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 36px; box-shadow: var(--shadow); }
-    .headline-accent { height: 4px; background: linear-gradient(90deg,#6c63ff,#f59e0b); }
-    .headline-body { padding: 28px 32px; display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; }
-    .headline-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-    .headline-title { font-size: 22px; font-weight: 800; line-height: 1.4; margin-bottom: 16px; }
-    .headline-content { font-size: 15px; color: #b8bcd8; line-height: 1.8; }
-    .headline-content p { margin-bottom: 12px; }
-    .source-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; padding: 7px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; color: var(--text-muted); transition: all 0.2s; }
-    .source-link:hover { border-color: #6c63ff; color: #a5a0ff; }
-    .chart-container { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-    .chart-title { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; font-weight: 600; }
-    .news-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 36px; }
-    .news-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 10px; transition: transform 0.2s, border-color 0.2s; position: relative; overflow: hidden; }
-    .news-card:hover { transform: translateY(-3px); }
-    .news-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-    .news-card.ai::before { background: var(--accent-ai); } .news-card.chain::before { background: var(--accent-chain); } .news-card.stock::before { background: var(--accent-stock); } .news-card.startup::before { background: var(--accent-startup); }
-    .news-card:hover.ai { border-color: rgba(108,99,255,0.4); } .news-card:hover.chain { border-color: rgba(245,158,11,0.4); } .news-card:hover.stock { border-color: rgba(16,185,129,0.4); } .news-card:hover.startup { border-color: rgba(244,63,94,0.4); }
-    .news-card-meta { display: flex; align-items: center; justify-content: space-between; }
-    .news-card-title { font-size: 15px; font-weight: 700; line-height: 1.4; }
-    .news-card-body { font-size: 13px; color: #8b90b8; line-height: 1.7; flex: 1; }
-    .news-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border); }
-    .news-card-source { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
-    .read-more { font-size: 12px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); color: var(--text-muted); transition: all 0.2s; }
-    .read-more:hover { background: var(--surface2); color: var(--text); }
-    footer { border-top: 1px solid var(--border); padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 12px; }
-    @media (max-width: 900px) { .summary-bar { grid-template-columns: repeat(2,1fr); } .headline-body { grid-template-columns: 1fr; } .news-grid { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 600px) { .header { padding: 18px 16px; } .container { padding: 20px 12px; } .news-grid { grid-template-columns: 1fr; } .header-right { display: none; } }
-  </style></head><body>
-<header class="header"><div class="header-left"><h1>⚡ AI · 链 · 股 · 创  每日日报</h1><div class="date">📅 2026年02月24日（星期二）· 早报版</div></div><div class="header-right"><span class="cat-badge cat-ai">🤖 AI</span><span class="cat-badge cat-chain">⛓ 区块链</span><span class="cat-badge cat-stock">📈 美股</span><span class="cat-badge cat-startup">🚀 创业</span></div></header>
-<div class="container"><div class="summary-bar"><div class="summary-card"><div class="summary-icon icon-ai">🤖</div><div class="summary-info"><div class="label">AI 热度指数</div><div class="value" style="color:#a5a0ff">92 / 100</div></div></div><div class="summary-card"><div class="summary-icon icon-chain">⛓</div><div class="summary-info"><div class="label">BTC 今日价格</div><div class="value" style="color:#fcd34d">US$95,420</div></div></div><div class="summary-card"><div class="summary-icon icon-stock">📈</div><div class="summary-info"><div class="label">纳斯达克</div><div class="value" style="color:#6ee7b7">+1.24%</div></div></div><div class="summary-card"><div class="summary-icon icon-startup">🚀</div><div class="summary-info"><div class="label">今日创业机会</div><div class="value" style="color:#fda4af">3 个亮点</div></div></div></div>
-<div class="section-title">📊 市场快照</div><div class="market-bar"><div class="market-item"><div class="name">S&amp;P 500</div><div class="price">5,948</div><div class="change up">▲ +0.87%</div></div><div class="market-item"><div class="name">NASDAQ</div><div class="price">19,142</div><div class="change up">▲ +1.24%</div></div><div class="market-item"><div class="name">NVIDIA (NVDA)</div><div class="price">US$874</div><div class="change up">▲ +3.2%</div></div><div class="market-item"><div class="name">BTC</div><div class="price">US$95,420</div><div class="change down">▼ -1.3%</div></div><div class="market-item"><div class="name">ETH</div><div class="price">US$3,280</div><div class="change up">▲ +0.6%</div></div><div class="market-item"><div class="name">SOL</div><div class="price">US$182</div><div class="change down">▼ -2.1%</div></div><div class="market-item"><div class="name">美元指数</div><div class="price">104.2</div><div class="change down">▼ -0.3%</div></div></div>
-<div class="section-title">🔥 今日头条深度</div><div class="headline-card"><div class="headline-accent"></div><div class="headline-body"><div><div class="headline-meta"><span class="cat-badge cat-ai">🤖 AI</span><span style="font-size:12px;color:var(--text-muted)">🕐 08:15 · 热度 ⭐⭐⭐⭐⭐</span></div>
-<div class="headline-title">Claude 3.7 Sonnet 发布：首个“混合推理”模型，AI 编程能力创历史新高</div><div class="headline-content">
-<p>Anthropic 今日正式发布 Claude 3.7 Sonnet，这是业内首个将<strong>快思考（直觉）</strong>和<strong>慢思考（深度推理）</strong>合并在同一个模型里的产品。你可以自己选择让它“快速回答”还是“混合思考”，就像切换一个开关。</p>
-<p>在编程能力上，Claude 3.7 在 SWE-bench 测试（真实软件工程任务）中得分 <strong>70.3%</strong>，是目前所有公开模型里最高的。简单说：它现在可以独立完成一个中等复杂度的编程任务，而不只是帮你写片段。</p>
-<p>对普通用户最实用的变化是：回答更少废话、逻辑更清晰、复杂问题不再“绕弯子”。配合 Claude Code（命令行工具），开发者效率提升非常明显。</p>
-<p style="color:#6c63ff;font-weight:600">💡 创业启示：混合推理模型的出现意味着“AI自动完成整个任务流”开始可行——这是 AI Agent 创业的最佳时间窗口。</p></div>
-<a class="source-link" href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank">🔗 来源：Anthropic 官方博客 · @AnthropicAI (X)</a></div>
-<div class="chart-container"><div class="chart-title">📊 主流大模型编程能力对比（SWE-bench 得分）</div><svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg"><line x1="60" y1="10" x2="60" y2="165" stroke="#2e3250" stroke-width="1"/><line x1="60" y1="165" x2="310" y2="165" stroke="#2e3250" stroke-width="1"/><line x1="60" y1="138" x2="310" y2="138" stroke="#2e3250" stroke-width="0.5" stroke-dasharray="4"/><line x1="60" y1="110" x2="310" y2="110" stroke="#2e3250" stroke-width="0.5" stroke-dasharray="4"/><line x1="60" y1="83" x2="310" y2="83" stroke="#2e3250" stroke-width="0.5" stroke-dasharray="4"/><line x1="60" y1="55" x2="310" y2="55" stroke="#2e3250" stroke-width="0.5" stroke-dasharray="4"/><line x1="60" y1="28" x2="310" y2="28" stroke="#2e3250" stroke-width="0.5" stroke-dasharray="4"/>
-<text x="52" y="168" text-anchor="end" fill="#7c7fa8" font-size="9">0%</text><text x="52" y="141" text-anchor="end" fill="#7c7fa8" font-size="9">25%</text><text x="52" y="113" text-anchor="end" fill="#7c7fa8" font-size="9">50%</text><text x="52" y="86" text-anchor="end" fill="#7c7fa8" font-size="9">75%</text><text x="52" y="58" text-anchor="end" fill="#7c7fa8" font-size="9">100%</text>
-<rect x="75" y="49" width="38" height="116" rx="4" fill="url(#g1)"/><text x="94" y="45" text-anchor="middle" fill="#a5a0ff" font-size="9" font-weight="bold">70.3%</text><text x="94" y="182" text-anchor="middle" fill="#8b90b8" font-size="8">Claude 3.7</text><rect x="130" y="63" width="38" height="102" rx="4" fill="url(#g2)"/><text x="149" y="59" text-anchor="middle" fill="#f9a8d4" font-size="9" font-weight="bold">62.1%</text><text x="149" y="182" text-anchor="middle" fill="#8b90b8" font-size="8">GPT-4o</text>
-<rect x="185" y="73" width="38" height="92" rx="4" fill="url(#g3)"/><text x="204" y="69" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">55.8%</text><text x="204" y="182" text-anchor="middle" fill="#8b90b8" font-size="8">Gemini 2.0</text><rect x="240" y="84" width="38" height="81" rx="4" fill="url(#g4)"/><text x="259" y="80" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="bold">49.2%</text><text x="259" y="182" text-anchor="middle" fill="#8b90b8" font-size="8">DeepSeek V3</text>
-<defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6c63ff"/><stop offset="100%" stop-color="#4338ca"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f43f5e"/><stop offset="100%" stop-color="#be123c"/></linearGradient><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#065f46"/></linearGradient><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#92400e"/></linearGradient></defs></svg><div style="font-size:11px;color:#555a7a;margin-top:8px;text-align:center">数据来源：SWE-bench 官方排行榜 · 2026-02-24</div></div></div></div></div>
-<div class="section-title">⚡ 今日快讯（9 条）</div><div class="news-grid">
-<div class="news-card ai"><div class="news-card-meta"><span class="cat-badge cat-ai">🤖 AI</span><span style="font-size:11px;color:var(--text-muted)">⭐⭐⭐⭐</span></div><div class="news-card-title">Andrej Karpathy：LLM 已是“新操作系统”，应用层才是真正战场</div><div class="news-card-body">前 OpenAI 核心研究员 Karpathy 在最新推文中表示，大模型本身的竞争已接近尾声，真正的价值将在“谁能在 LLM 之上建立最好的应用层”上体现。他类比 PC 时代——英特尔芯片很重要，但 Windows 和 Office 才是真正赢家。对 AI 创业者来说信号很明确：专注垂直场景。</div><div class="news-card-footer"><div class="news-card-source">🔗 @karpathy · X</div><a class="read-more" href="https://twitter.com/karpathy" target="_blank">查看原文</a></div></div>
-<div class="news-card chain"><div class="news-card-meta"><span class="cat-badge cat-chain">⛓ 区块链</span><span style="font-size:11px;color:var(--text-muted)">⭐⭐⭐⭐⭐</span></div><div class="news-card-title">比特币跌破 US$95,000，链上数据显示长期持有者仍未松手</div><div class="news-card-body">BTC 过去 24 小时下跌约 1.3%，短期投机盘有所撤退。但 Glassnode 链上数据显示，持币超过 1 年的“长期持有者”地址持仓量反而在增加，历史上这个信号往往出现在牛市中期调整阶段。Raoul Pal 表示“宏观流动性周期仍在上行，调整是正常的”。</div><div class="news-card-footer"><div class="news-card-source">🔗 @RaoulGMI · Glassnode</div><a class="read-more" href="https://glassnode.com" target="_blank">查看原文</a></div></div>
-<div class="news-card stock"><div class="news-card-meta"><span class="cat-badge cat-stock">📈 美股</span><span style="font-size:11px;color:var(--text-muted)">⭐⭐⭐⭐</span></div><div class="news-card-title">NVIDIA 本周将公布财报，华尔街预期数据中心收入再创新高</div><div class="news-card-body">市场预期 NVDA 本季度数据中心收入约 US$380 亿，同比增长超 100%。分析师关注的核心问题是 Blackwell 产能爬坡速度，以及 2026 年下一代 Rubin 架构的时间表。Cathie Wood 的 ARK 基金持续减持，但摩根士丹利维持“增持”评级，目标价 US$1,000。</div><div class="news-card-footer"><div class="news-card-source">🔗 @CathieWood · Morning Brew</div><a class="read-more" href="https://morningbrew.com" target="_blank">查看原文</a></div></div>
-<div class="news-card startup"><div class="news-card-meta"><span class="cat-badge cat-startup">🚀 创业机会</span><span style="font-size:11px;color:var(--text-muted)">⭐⭐⭐⭐⭐</span></div><div class="news-card-title">Greg Isenberg：AI + 法律服务是下一个 US$10B 赛道，没有技术背景也能做</div><div class="news-card-body">Greg 在最新视频中分析，美国法律服务市场每年 US$4000 亿，但 80% 的人因费用太贵放弃请律师。AI 可以把“问法律问题”的成本从 US$300/小时压到接近零。建议：找垂直法律领域（移民、合同、房产），用现有 LLM API 搭 MVP，3 个月内验证商业模式。</div><div class="news-card-footer"><div class="news-card-source">🔗 @gregisenberg · YouTube</div><a class="read-more" href="https://youtube.com/@gregisenberg" target="_blank">查看原文</a></div></div>
-<div class="news-card ai"><div class="news-card-meta"><span class="cat-badge cat-ai">🤖 AI</span><span style="font-size:11px;color:var(--text-muted)">⭐⭐⭐</span></div><div class="news-card-title">Google 发布 Gemini 2.0 Pro：多模态能力全面升级，免费向开发者开放</div><div class="news-card-body">Gemini 2.0 Pro 现已在 Google AI Studio 向所有开发者免费开放，支持 100 万 token 超长上下文窗口，可以一次性处理整本书或完整代码库。Google 明显在用“免费策略”抢夺开发者生态，对 OpenAI 和 Anthropic 形成压力。</div><div class="news-card-footer"><div class="news-card-source">🔗 Google DeepMind · TLDR AI</div><a class="read-more" href="https://tldr.tech/ai" target="_blank">查看原文</a></div></div>
-<div class="news-card chain"><div class="news-card-meta"><span class="cat-badge cat-chain">⛓ 区块链</span><span style="font-size:11px;color:var(--text-muted)">⭐⭐⭐</span></div><div class="news-card-title">Solana 生态 DeFi 锁仓量突破 US$120 亿，Jupiter DEX 日交易量创纪录</div><div class="news-card-body">DefiLlama 数据显示，Solana TVL 达到 US$121 亿，正式超过 BNB Chain。Jupiter（Solana 最大聚合 DEX）单日交易量突破 US$30 亿，超过 Uniswap。分析师认为 Solana 的低费高速特性在零售用户中越来越受欢迎，Coin Bureau 视频详细分析了生态健康度。</div><div class="news-card-footer"><div class="news-card-source">🔗 DefiLlama · Coin Bureau YouTube</div><a class="read-more" href="https://youtube.com/@CoinBureau" target="_blank">查看原文</a></div></div>
-<div class="news-card stock"><div class="news-card-meta"><span class="cat-badge cat-stock">📈 美股</span><span style="font-size:11px;color:var(--text-muted)">⭐⭐⭐⭐</span></div><div class="news-card-title">特斯拉 FSD 最新版本在德州自动驾驶 1000 英里无接管，股价反弹 4%</div><div class="news-card-body">马斯克在 X 上分享了一段 FSD v13.2 在德克萨斯州完成 1000 英里无人接管驾驶的视频，引发市场关注。分析师表示若 Robotaxi 业务能在 2026 年下半年正式商业化，特斯拉估值逻辑将完全改变。目前股价在 US$280 附近，市场分歧仍大。</div><div class="news-card-footer"><div class="news-card-source">🔗 @elonmusk · The Diff</div><a class="read-more" href="https://diff.substack.com" target="_blank">查看原文</a></div></div>
-<div class="news-card startup"><div class="news-card-meta"><span class="cat-badge cat-startup">🚀 创业机会</span><span style="font-size:11px;color:var(--text-muted)">⭐⭐⭐⭐</span></div><div class="news-card-title">YC 2026 最新批次揭秘：AI Agent 项目录取率是平均值 3 倍</div><div class="news-card-body">Paul Graham 透露 YC 今年录取率创新低（1.2%），但 AI Agent 类项目录取率明显偏高。被录取团队共同特点：有垂直行业经验（非纯技术）、6 周内从想法到 MVP、初始用户来自创始人自己的人脉圈。Lenny’s Newsletter 同期发布了“如何找到你的第一个 100 个用户”深度指南。</div><div class="news-card-footer"><div class="news-card-source">🔗 @paulg · Lenny’s Newsletter</div><a class="read-more" href="https://twitter.com/paulg" target="_blank">查看原文</a></div></div>
-<div class="news-card ai"><div class="news-card-meta"><span class="cat-badge cat-ai">🤖 AI</span><span style="font-size:11px;color:var(--text-muted)">⭐⭐⭐</span></div><div class="news-card-title">Ethan Mollick：用 AI 的人正在替代不用 AI 的人，速度比你想象的快</div><div class="news-card-body">沃顿商学院教授 Mollick 公布 6 个月实验结论：AI 可独立完成知识工作约 40%，“判断力”和“人际沟通”仍需人类介入。关键洞察：不要问“AI 会不会取代我”，要问“用 AI 的人会不会取代不用 AI 的我”——这个答案对职场人士和创业者都至关重要。</div><div class="news-card-footer"><div class="news-card-source">🔗 @emollick · Substack</div><a class="read-more" href="https://twitter.com/emollick" target="_blank">查看原文</a></div></div>
-</div><div class="section-title">🧠 今日洞察 · 编辑点评</div>
-<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:36px;"><p style="font-size:15px;line-height:1.9;color:#b8bcd8">今天最值得关注的主线是 <strong style="color:#a5a0ff">AI 能力跃升 → 应用层机会爆发</strong> 这条逻辑链。Claude 3.7 的发布标志着“AI 够不够用”的问题基本解决，接下来的竞争是<strong style="color:#fcd34d">谁先把 AI 能力封装成用户愿意付钱的产品</strong>。Google 免费开放 Gemini 2.0 Pro 是一个强信号：AI 基础能力正在快速商品化，这反而是创业者的机会——因为差异化不再靠模型，而靠<strong style="color:#6ee7b7">对特定用户场景的深度理解</strong>。加密方面，BTC 的短期回调和链上数据的分化值得关注，长期持有者不动摇是牛市中期的经典特征。<strong style="color:#fda4af">美股本周最大催化剂是 NVDA 财报</strong>，结果将决定整个 AI 板块短期走向。</p></div></div>
-<footer><div>📌 信息来源：X (Twitter) · YouTube · Bankless · Morning Brew · TLDR AI · The Generalist · The Diff · Glassnode · DefiLlama</div><div>🤖 由 Claude AI 生成 · 2026-02-24 08:30 · ⚠️ 仅供参考，不构成投资建议</div></footer></body></html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息日报 - 2026-03-09</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; }
+        body { background-color: #0f1117; color: #e2e8f0; line-height: 1.6; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .container { display: flex; flex-direction: column; gap: 24px; }
+        .header { border-bottom: 1px solid #1e2230; padding-bottom: 16px; margin-bottom: 8px; }
+        .date { font-size: 24px; font-weight: 700; color: #e2e8f0; }
+        .subtitle { font-size: 14px; color: #94a3b8; margin-top: 4px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #e2e8f0; margin-bottom: 16px; display: flex; align-items: center; }
+        .section-title::before { content: ''; display: inline-block; width: 4px; height: 18px; margin-right: 10px; border-radius: 2px; }
+        .ai-title::before { background-color: #6c63ff; }
+        .blockchain-title::before { background-color: #f59e0b; }
+        .stock-title::before { background-color: #10b981; }
+        .startup-title::before { background-color: #f43f5e; }
+        .research-title::before { background-color: #a78bfa; }
+        .insight-title::before { background-color: #0ea5e9; }
+        .card { background-color: #161b27; border-radius: 12px; padding: 20px; border: 1px solid #1e2230; }
+        .overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .overview-card { background-color: #1a2035; border-radius: 10px; padding: 20px; text-align: center; border-top: 4px solid; }
+        .overview-label { font-size: 12px; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .overview-value { font-size: 36px; font-weight: 700; margin: 8px 0; }
+        .overview-desc { font-size: 14px; color: #9ca3af; }
+        .news-grid { display: flex; flex-direction: column; gap: 16px; }
+        .news-item { padding: 16px; border-bottom: 1px solid #1e2230; }
+        .news-item:last-child { border-bottom: none; }
+        .news-title { font-size: 16px; font-weight: 600; color: #e2e8f0; margin-bottom: 8px; }
+        .news-summary { font-size: 14px; color: #94a3b8; margin-bottom: 12px; }
+        .news-source { font-size: 12px; color: #4a5568; }
+        .research-item { border-left: 4px solid #a78bfa; padding-left: 16px; margin-bottom: 20px; }
+        .research-org { font-size: 12px; color: #a78bfa; font-weight: 600; margin-bottom: 4px; }
+        .research-name { font-size: 16px; font-weight: 600; color: #e2e8f0; margin-bottom: 8px; }
+        .research-desc { font-size: 14px; color: #94a3b8; margin-bottom: 8px; }
+        .link { color: #6c63ff; text-decoration: none; }
+        .link:hover { text-decoration: underline; }
+        .source-list { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; }
+        .source-list a { color: #94a3b8; text-decoration: none; }
+        .source-list a:hover { color: #6c63ff; text-decoration: underline; }
+        .color-ai { color: #6c63ff; }
+        .color-blockchain { color: #f59e0b; }
+        .color-stock { color: #10b981; }
+        .color-startup { color: #f43f5e; }
+        .color-research { color: #a78bfa; }
+        .positive { color: #10b981; }
+        .negative { color: #ef4444; }
+        .chart-container { margin: 20px 0; }
+        .data-card-container { display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
+        .data-card { background: #161b27; border-radius: 10px; padding: 18px 16px; flex: 1; min-width: 130px; text-align: center; border-top: 3px solid; }
+        .data-label { color: #94a3b8; font-size: 11px; margin-bottom: 8px; display: block; }
+        .data-value { font-size: 30px; font-weight: 700; display: block; }
+        .data-desc { color: #94a3b8; font-size: 11px; margin-top: 6px; display: block; }
+        table { width: 100%; border-collapse: collapse; background: #161b27; border-radius: 10px; overflow: hidden; margin: 16px 0; }
+        th { background: #1e2230; color: #a78bfa; font-size: 12px; padding: 10px 14px; text-align: left; }
+        td { color: #e2e8f0; font-size: 13px; padding: 10px 14px; border-bottom: 1px solid #1e2230; }
+        tr:nth-child(odd) { background: #161b27; }
+        tr:nth-child(even) { background: #1a2035; }
+        .source-note { font-size: 11px; color: #4a5568; margin-top: 8px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="date">2026-03-09（星期一）· 早报版</div>
+            <div class="subtitle">专业信息分析师 | AI / 区块链 / 美股 / AI创业 日报</div>
+        </div>
+
+        <!-- 板块1：今日速览 -->
+        <div class="overview-grid">
+            <div class="overview-card" style="border-top-color: #f59e0b;">
+                <div class="overview-label">BTC 价格</div>
+                <div class="overview-value" style="color: #f59e0b;">US$69,093</div>
+                <div class="overview-desc">24h 涨跌 <span class="positive">+2.57%</span></div>
+            </div>
+            <div class="overview-card" style="border-top-color: #10b981;">
+                <div class="overview-label">纳斯达克</div>
+                <div class="overview-value" style="color: #ef4444;">-1.16%</div>
+                <div class="overview-desc">油价飙升超 US$100 引发通胀担忧</div>
+            </div>
+            <div class="overview-card" style="border-top-color: #a78bfa;">
+                <div class="overview-label">加密情绪指数</div>
+                <div class="overview-value" style="color: #ef4444;">8/100</div>
+                <div class="overview-desc">Extreme Fear</div>
+            </div>
+            <div class="overview-card" style="border-top-color: #6c63ff;">
+                <div class="overview-label">今日 AI 快讯</div>
+                <div class="overview-value" style="color: #6c63ff;">5条</div>
+                <div class="overview-desc">国防合同争议</div>
+            </div>
+        </div>
+
+        <!-- 板块2：市场快照 -->
+        
+<section style="margin:28px 0;">
+  <h2 style="font-size:20px;font-weight:700;color:#e2e8f0;margin-bottom:16px;
+             padding-left:12px;border-left:4px solid #6c63ff;">市场快照</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+
+    <!-- 加密货币 -->
+    <div style="background:#161b27;border-radius:12px;padding:20px;">
+      <div style="font-size:13px;font-weight:700;color:#f59e0b;margin-bottom:12px;
+                  text-transform:uppercase;letter-spacing:.5px;">加密货币</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">BTC</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$69,093&nbsp;<span style="color:#10b981;font-size:13px;">(+2.57%)</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">ETH</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$2,024&nbsp;<span style="color:#10b981;font-size:13px;">(+3.92%)</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">SOL</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$85.00&nbsp;<span style="color:#10b981;font-size:13px;">(+3.42%)</span></span></div>
+    </div>
+
+    <!-- 美股指数 -->
+    <div style="background:#161b27;border-radius:12px;padding:20px;">
+      <div style="font-size:13px;font-weight:700;color:#10b981;margin-bottom:12px;
+                  text-transform:uppercase;letter-spacing:.5px;">美股指数</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">纳斯达克</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">22,128.36&nbsp;<span style="color:#f43f5e;font-size:13px;">(-1.16%)</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">标普500</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">6,645.74&nbsp;<span style="color:#f43f5e;font-size:13px;">(-1.40%)</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">道琼斯</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">46,674.40&nbsp;<span style="color:#f43f5e;font-size:13px;">(-1.74%)</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">NVDA</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$177.47&nbsp;<span style="color:#f43f5e;font-size:13px;">(-0.20%)</span></span></div>
+    </div>
+
+    <!-- 市场情绪仪表盘 -->
+    <div style="background:#161b27;border-radius:12px;padding:20px;">
+      <div style="font-size:13px;font-weight:700;color:#a78bfa;margin-bottom:12px;
+                  text-transform:uppercase;letter-spacing:.5px;">市场情绪</div>
+      <div style="display:flex;gap:8px;justify-content:space-around;align-items:flex-start;">
+        <div style="flex:1;text-align:center;padding:8px 6px 4px;">
+  <div style="font-size:11px;color:#94a3b8;margin-bottom:10px;font-weight:600;
+              letter-spacing:.6px;text-transform:uppercase;">加密市场情绪</div>
+  <div style="font-size:44px;font-weight:800;color:#ef4444;
+              line-height:1;margin-bottom:4px;">8</div>
+  <div style="font-size:12px;color:#ef4444;font-weight:600;
+              margin-bottom:10px;">极度恐慌</div>
+  <div style="background:#2d3748;border-radius:6px;height:8px;
+              overflow:hidden;margin:0 4px 8px;">
+    <div style="width:8%;height:100%;background:#ef4444;
+                border-radius:6px;transition:width .3s;"></div>
+  </div>
+  <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank"
+     style="font-size:11px;color:#4a5568;text-decoration:none;">Alternative.me</a>
+</div><div style="flex:1;text-align:center;padding:8px 6px 4px;">
+  <div style="font-size:11px;color:#94a3b8;margin-bottom:10px;font-weight:600;
+              letter-spacing:.6px;text-transform:uppercase;">美股市场情绪</div>
+  <div style="font-size:44px;font-weight:800;color:#ef4444;
+              line-height:1;margin-bottom:4px;">21</div>
+  <div style="font-size:12px;color:#ef4444;font-weight:600;
+              margin-bottom:10px;">极度恐慌</div>
+  <div style="background:#2d3748;border-radius:6px;height:8px;
+              overflow:hidden;margin:0 4px 8px;">
+    <div style="width:21%;height:100%;background:#ef4444;
+                border-radius:6px;transition:width .3s;"></div>
+  </div>
+  <a href="https://www.cnn.com/markets/fear-and-greed" target="_blank"
+     style="font-size:11px;color:#4a5568;text-decoration:none;">CNN Fear & Greed</a>
+</div>
+      </div>
+    </div>
+
+  </div>
+  <!-- 数据来源 -->
+  <div style="text-align:center;padding:10px 0 0;font-size:12px;color:#4a5568;
+              border-top:1px solid #1e2230;margin-top:12px;">
+    数据来源：
+    <a href="https://www.coingecko.com" target="_blank" style="color:#6c63ff;text-decoration:none;">CoinGecko</a>（加密价格）·
+    <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color:#6c63ff;text-decoration:none;">Alternative.me</a>（加密情绪）·
+    <a href="https://www.cnn.com/markets/fear-and-greed" target="_blank" style="color:#6c63ff;text-decoration:none;">CNN Fear &amp; Greed</a>（美股情绪）·
+    <a href="https://finance.yahoo.com" target="_blank" style="color:#6c63ff;text-decoration:none;">Yahoo Finance</a>（美股指数）
+  </div>
+</section>
+
+        <!-- 板块3：AI头条深度 -->
+        <div class="card">
+            <div class="section-title ai-title">AI头条深度</div>
+            <div class="news-title">五角大楼与 Anthropic 的争议会吓跑国防 AI 初创公司吗？（Will the Pentagon’s Anthropic controversy scare startups away from defense work?）</div>
+            <div class="news-summary" style="margin-top: 12px; margin-bottom: 20px;">
+                <p>五角大楼与明星AI公司Anthropic之间关于一项潜在国防合同的争议正在发酵，这起事件远不止是一单生意的得失，它像一块投入湖面的巨石，激起了关于AI伦理、商业利益与国家安全的巨大涟漪。核心矛盾在于，Anthropic作为一家以“安全、可靠”为立身之本的AI公司，其内部对于是否应该将尖端AI技术应用于军事领域存在严重分歧。这种分歧最终可能演变为对政府合同的公开拒绝，从而将AI公司与国防机构合作的潜在“雷区”暴露在公众视野之下。</p>
+                <p>这起事件的影响是双向的。对于像Anthropic这样的初创公司，拒绝一份利润丰厚的政府合同，尤其是来自五角大楼的合同，需要巨大的勇气和坚定的价值观支撑。这向市场传递了一个明确信号：并非所有AI公司都愿意无条件地拥抱“军事-工业复合体”。然而，这也可能让它们在未来的融资或商业拓展中，被贴上“难以合作”或“价值观优先于商业”的标签，从而失去一部分机会。另一方面，对于五角大楼和美国政府而言，顶尖AI初创公司的犹豫或拒绝，无疑会拖慢其将AI技术快速整合进国防体系的步伐，在日益激烈的全球科技竞争中可能构成战略弱点。</p>
+                <p>更深层次的趋势是，AI行业正在经历一场“价值观分化”。一部分公司将遵循传统的科技公司路径，积极寻求与政府、大企业的合作，将技术变现；另一部分则可能像早期的部分互联网公司一样，高举“科技向善”的旗帜，对应用场景进行严格自我审查。这种分化将重塑AI产业的生态格局，并可能催生专注于“可信AI”、“符合伦理的AI解决方案”的新兴细分市场和投资赛道。</p>
+            </div>
+
+            <!-- 数据可视化：格式C - 对比表格 -->
+            <div class="chart-container">
+                <p style="font-size:14px; font-weight:bold; color:#e2e8f0; text-align:center; margin-bottom:10px;">主要AI公司对国防/政府合作立场对比</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>机构/公司</th>
+                            <th>核心立场</th>
+                            <th>具体行动/表态</th>
+                            <th>时间线</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Anthropic</strong></td>
+                            <td>内部对军事应用存在严重伦理分歧，可能拒绝特定国防合同。</td>
+                            <td>正在评估与五角大楼的合作，面临内部压力。</td>
+                            <td>2026年3月（当前争议）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Google</strong></td>
+                            <td>曾因员工抗议退出Maven项目，但通过子公司（如Google Cloud）继续与政府合作。</td>
+                            <td>发布AI原则，禁止将AI用于武器，但允许与军方在网络安全、后勤等领域合作。</td>
+                            <td>2018年（Maven项目争议）至今</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Microsoft</strong></td>
+                            <td>积极拥抱政府与国防合同，视其为重要业务板块。</td>
+                            <td>持续获得美国国防部JEDI等巨额云与AI合同。</td>
+                            <td>长期策略</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OpenAI</strong></td>
+                            <td>政策禁止将模型用于军事和战争，但界限模糊（如网络安全允许）。</td>
+                            <td>使用条款明确禁止“军事和战争”用途。</td>
+                            <td>2023年政策制定至今</td>
+                        </tr>
+                        <tr>
+                            <td><strong>新兴AI初创公司</strong></td>
+                            <td>态度分化：一部分视政府合同为关键收入，另一部分将伦理作为品牌核心。</td>
+                            <td>融资时需向投资人阐明对政府/国防业务的立场。</td>
+                            <td>未来趋势</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="source-note">数据来源：<a href="https://techcrunch.com/2026/03/08/will-the-pentagons-anthropic-controversy-scare-startups-away-from-defense-work/" target="_blank" style="color:#6c63ff;text-decoration:none;">TechCrunch</a> 及公开资料综合（2026-03-08）</div>
+            </div>
+        </div>
+
+        <!-- 板块4：今日快讯 -->
+        <div class="card">
+            <div class="section-title" style="color:#e2e8f0;">今日快讯</div>
+            <div class="news-grid">
+                <!-- AI -->
+                <div class="news-item">
+                    <div class="news-title"><span class="color-ai">[AI]</span> AI 数据中心催生“男人营”新商机，拘留设施运营商入局（Owner of ICE detention facility sees big opportunity in AI man camps）</div>
+                    <div class="news-summary">随着AI数据中心向偏远地区扩张，为解决建设工人住宿问题，一种类似过去石油行业“男人营”的模式兴起。有趣的是，一家原本运营美国移民拘留设施的公司看到了其中的商机，计划转型或拓展此业务。这揭示了AI基础设施狂潮背后，劳动力、地产乃至边缘产业的连锁反应。</div>
+                    <div class="news-source">来源：<a href="https://techcrunch.com/2026/03/08/owner-of-ice-detention-facility-sees-big-opportunity-in-ai-man-camps/" target="_blank" style="color:#6c63ff;font-size:12px;">TechCrunch</a></div>
+                </div>
+                <!-- 区块链 -->
+                <div class="news-item">
+                    <div class="news-title"><span class="color-blockchain">[区块链]</span> 稳定币支付平台 KAST 以 US$6 亿估值融资 US$8000 万（KAST raises $80 million at $600 million valuation to expand stablecoin payments platform）</div>
+                    <div class="news-summary">专注于企业稳定币支付解决方案的KAST完成了大额融资，估值达US$6亿。这表明尽管市场情绪谨慎，但区块链在跨境支付、企业财资管理等实用赛道的应用仍被资本看好，稳定币作为连接传统金融与加密世界的管道，其基础设施层持续获得投资。</div>
+                    <div class="news-source">来源：<a href="https://www.coindesk.com/business/2026/03/09/kast-raises-usd80-million-at-usd600-million-valuation-to-expand-stablecoin-payments-platform" target="_blank" style="color:#6c63ff;font-size:12px;">CoinDesk</a></div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title"><span class="color-blockchain">[区块链]</span> 韩国交易所 Bithumb 因反洗钱违规面临 6 个月部分业务禁令提议（Bithumb faces proposed 6-month partial ban over South Korea AML breaches）</div>
+                    <div class="news-summary">韩国金融监管机构提议对头部加密货币交易所Bithumb实施为期6个月的部分业务禁令，原因是其反洗钱（AML）合规存在缺陷。这表明全球范围内对加密货币交易所的监管审查持续收紧，合规成本已成为行业关键门槛，任何漏洞都可能导致严重的运营中断。</div>
+                    <div class="news-source">来源：<a href="https://www.coindesk.com/business/2026/03/09/bithumb-faces-proposed-6-month-partial-ban-over-south-korea-aml-breaches" target="_blank" style="color:#6c63ff;font-size:12px;">CoinDesk</a></div>
+                </div>
+                <!-- 美股 -->
+                <div class="news-item">
+                    <div class="news-title"><span class="color-stock">[美股]</span> 美股普跌：道指、标普、纳指下滑，油价飙升至每桶 US$100 以上（Stock market today: Dow, S&P 500, Nasdaq fall as oil prices surge to over $100 a barrel）</div>
+                    <div class="news-summary">受伊朗局势紧张导致霍尔木兹海峡关闭影响，国际油价突破每桶US$100关口，引发市场对通胀再度抬头的担忧。美股三大指数应声下跌，科技股占比较高的纳斯达克指数跌幅领先。能源价格冲击再次成为左右市场短期情绪的关键变量。</div>
+                    <div class="news-source">来源：<a href="https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-fall-as-oil-prices-surge-to-over-100-a-barrel-133208563.html" target="_blank" style="color:#6c63ff;font-size:12px;">Yahoo Finance</a></div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title"><span class="color-stock">[美股]</span> Hims & Hers 股价飙升，与诺和诺德就口服 GLP-1 药物达成和解（Hims & Hers Catapults After Settling Its Bloody Saga With Novo Nordisk）</div>
+                    <div class="news-summary">远程医疗公司Hims & Hers与制药巨头诺和诺德就口服版GLP-1减肥药相关法律纠纷达成和解。此消息推动Hims股价大幅上涨。这表明在减肥药热潮中，围绕药物递送形式、专利和市场的争夺异常激烈，而和解往往能为相关公司扫清商业化道路上的重大障碍。</div>
+                    <div class="news-source">来源：<a href="https://www.investors.com/news/technology/hims-stock-novo-nordisk-deal-oral-wegovy-glp-1/?src=A00220&yptr=yahoo" target="_blank" style="color:#6c63ff;font-size:12px;">Investor‘s Business Daily via Yahoo</a></div>
+                </div>
+                <!-- 创业 -->
+                <div class="news-item">
+                    <div class="news-title"><span class="color-startup">[创业]</span> 美国上诉法院裁定：通过电子邮件更新服务条款，继续使用可视为同意（US Court of Appeals: TOS may be updated by email, use can imply consent [pdf]）</div>
+                    <div class="news-summary">美国第九巡回上诉法院的一项裁决为科技公司更新服务条款提供了更明确的法律依据。法院认为，通过电子邮件向用户发送条款更新通知，用户若继续使用服务，则可被视为同意新条款。这一判例降低了公司更新用户协议的操作门槛，但也引发了关于用户真实同意标准的讨论。</div>
+                    <div class="news-source">来源：<a href="https://cdn.ca9.uscourts.gov/datastore/memoranda/2026/03/03/25-403.pdf" target="_blank" style="color:#6c63ff;font-size:12px;">US Court of Appeals</a></div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title"><span class="color-startup">[创业]</span> 展示 HN：VS Code 智能体看板——为 AI 辅助开发者设计的任务管理工具（Show HN: VS Code Agent Kanban: Task Management for the AI-Assisted Developer）</div>
+                    <div class="news-summary">一款集成在VS Code中的新型任务管理工具亮相，专为使用AI编程助手（如GitHub Copilot）的开发者设计。它试图将AI生成的代码片段、重构建议和待办任务以看板形式可视化管理，旨在解决“AI编码产生大量碎片化输出，难以跟踪和整合”的痛点。</div>
+                    <div class="news-source">来源：<a href="https://www.appsoftware.com/blog/introducing-vs-code-agent-kanban-task-management-for-the-ai-assisted-developer" target="_blank" style="color:#6c63ff;font-size:12px;">AppSoftware Blog</a></div>
+                </div>
+                <!-- AI 研究 -->
+                <div class="news-item">
+                    <div class="news-title"><span class="color-research">[AI研究]</span> 实时 AI 服务经济：跨设备-边缘-云连续体的智能体计算框架（Real-Time AI Service Economy: A Framework for Agentic Computing Across the Continuum）</div>
+                    <div class="news-summary">一篇新论文提出“实时AI服务经济”框架，旨在协调在设备、边缘和云端运行的自主AI智能体。其核心是解决智能体产生的延迟敏感型工作负载的调度、资源分配和计费问题。这为未来无处不在的AI服务提供了一个底层系统架构蓝图。</div>
+                    <div class="news-source">来源：<a href="https://arxiv.org/abs/2603.05614" target="_blank" style="color:#6c63ff;font-size:12px;">arXiv</a></div>
+                </div>
+                <!-- 综合 -->
+                <div class="news-item">
+                    <div class="news-title"><span class="color-blockchain">[综合]</span> 前 Snap 高管：加密货币不属于 AI 投资组合，它是“不同的物种”（Crypto doesn’t belong in AI portfolio as it’s ‘a different animal,’ says tech investor and former Snap exec）</div>
+                    <div class="news-summary">一位科技投资者兼前Snap高管公开表示，加密货币不应被纳入以AI为主题的投资组合中。他认为两者驱动逻辑、风险属性和估值模型完全不同，强行捆绑是概念炒作。此观点反映了市场在热捧“AI+Crypto”叙事的同时，也存在理性的分野声音。</div>
+                    <div class="news-source">来源：<a href="https://www.coindesk.com/markets/2026/03/09/crypto-doesn-t-belong-in-ai-portfolio-as-it-s-a-different-animal-says-tech-investor-and-former-snap-exec" target="_blank" style="color:#6c63ff;font-size:12px;">CoinDesk</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块5：AI研究前沿 -->
+        <div class="card">
+            <div class="section-title research-title">AI研究前沿</div>
+            <div class="research-item">
+                <div class="research-org">arxiv · 机构未知</div>
+                <div class="research-name">Traversal-as-Policy: Log-Distilled Gated Behavior Trees as Externalized, Verifiable Policies for Safe, Robust, and Efficient Agents</div>
+                <div class="research-desc">研究指出当前LLM智能体的长期策略隐含在模型权重和对话记录中，难以验证和保证安全。他们提出将策略“外化”为一种可验证的“门控行为树”，通过日志数据蒸馏得到。这好比给AI智能体装上一个可检查、可审计的“决策流程图”，对开发安全可靠的自主智能体（如机器人、游戏NPC）至关重要。</div>
+                <div class="news-source">链接：<a href="https://arxiv.org/abs/2603.05517" target="_blank" style="color:#6c63ff;font-size:12px;">arXiv:2603.05517</a></div>
+            </div>
+            <div class="research-item">
+                <div class="research-org">arxiv · 机构未知</div>
+                <div class="research-name">JAWS: Enhancing Long-term Rollout of Neural Operators via Spatially-Adaptive Jacobian Regularization</div>
+                <div class="research-desc">数据驱动的神经网络算子（用于模拟物理系统等）在长期推演中容易累积误差导致崩溃。这项研究提出一种“空间自适应雅可比正则化”方法，能动态稳定推演过程。简单说，它让AI在模拟天气预报、流体动力学时，能更长时间保持准确，减少“越算越离谱”的情况。</div>
+                <div class="news-source">链接：<a href="https://arxiv.org/abs/2603.05538" target="_blank" style="color:#6c63ff;font-size:12px;">arXiv:2603.05538</a></div>
+            </div>
+            <div class="research-item">
+                <div class="research-org">arxiv · 机构未知</div>
+                <div class="research-name">RoboLayout: Differentiable 3D Scene Generation for Embodied Agents</div>
+                <div class="research-desc">让AI根据语言指令（如“布置一个温馨的客厅”）直接生成可供机器人交互的3D场景布局。研究结合了视觉语言模型的空间推理能力和可微分渲染技术，使得生成的场景不仅在视觉上合理，而且考虑了机器人的行动可行性（如路径、可抓取性）。这是迈向“能理解物理世界并动手改造”的具身智能的重要一步。</div>
+                <div class="news-source">链接：<a href="https://arxiv.org/abs/2603.05522" target="_blank" style="color:#6c63ff;font-size:12px;">arXiv:2603.05522</a></div>
+            </div>
+        </div>
+
+        <!-- 板块6：编辑洞察 -->
+        <div class="card">
+            <div class="section-title insight-title">编辑洞察</div>
+            <div class="news-summary">
+                <p>今日主线清晰呈现“冲突与成本”。<strong>宏观上</strong>，地缘冲突（伊朗局势）推高油价，直接向美股（尤其是成长股）施加“通胀成本”压力，市场避险情绪升温。<strong>产业中观层面</strong>，AI的扩张成本以另一种形式显现：数据中心建设催生“男人营”这种边缘业态，甚至吸引非常规玩家入场；而更隐形的“伦理与政治成本”在Anthropic与五角大楼的僵局中爆发，迫使AI公司在其技术理想与商业现实、国家需求间做出痛苦抉择。<strong>在区块链领域</strong>，合规成本高昂（Bithumb面临禁令），但实用型赛道（如企业支付KAST）仍获资本押注，显示市场在恐惧中寻找真实价值。研究前沿则专注于降低AI的“可靠性成本”，让智能体更稳定、可验证。今日图景表明，技术浪潮在席卷一切的同时，其引发的经济、社会、伦理摩擦成本正日益凸显，成为决定下一阶段发展形态的关键变量。</p>
+            </div>
+        </div>
+
+        <!-- 板块7：信息来源 -->
+        <div class="card">
+            <div class="section-title" style="color:#94a3b8; font-size:16px;">信息来源</div>
+            <div class="source-list">
+                <a href="https://techcrunch.com/" target="_blank">TechCrunch</a> |
+                <a href="https://www.coindesk.com/" target="_blank">CoinDesk</a> |
+                <a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance</a> |
+                <a href="https://www.investors.com/" target="_blank">Investor‘s Business Daily</a> |
+                <a href="https://arxiv.org/" target="_blank">arXiv</a> |
+                <a href="https://cdn.ca9.uscourts.gov/" target="_blank">US Court of Appeals</a> |
+                <a href="https://www.appsoftware.com/" target="_blank">AppSoftware Blog</a> |
+                <a href="https://arcade.pirillo.com/" target="_blank">Arcade by Chris Pirillo</a>
+            </div>
+        </div>
+    </div>
+    <div style="background:#1e2230; border-left:4px solid #6c63ff; border-radius:8px; padding:24px; margin:20px 0; font-family:system-ui,sans-serif; color:#e2e8f0">
+    <div>
+        <span style="background:#6c63ff; color:white; border-radius:20px; padding:4px 14px; font-size:13px;">🛠 工具深挖</span>
+        <span style="color:#94a3b8; font-size:13px; margin-left:10px;">5分钟读完 · 今日认知升级</span>
+    </div>
+    <div style="font-size:20px; font-weight:bold; margin:12px 0;">🏯 AI护城河·今日洞察</div>
+    <div style="line-height:1.6; margin-bottom:20px;">
+        <div style="margin-bottom:12px;">【多模态推理】→ 这意味着你的AI竞争力将从“信息处理”转向“场景理解”，谁能将AI的视觉、语言、逻辑能力无缝缝合进具体工作流，谁就能构建难以复制的效率壁垒。</div>
+        <div style="margin-bottom:12px;">【智能体协作】→ 对你而言，单点工具的精通价值在下降，未来的竞争力在于设计和指挥多个AI智能体协同作战的“交响能力”，这是人机协作的新层级。</div>
+        <div style="margin-bottom:12px;">【成本陡降】→ 这直接降低了构建AI应用的门槛，你的护城河必须从“技术获取”转向“场景定义与数据飞轮”，用更低的成本更快地试错和迭代是关键。</div>
+        <div style="margin-bottom:12px;">【实时学习】→ 静态的提示词工程即将过时，你的核心竞争力将升级为为AI设计持续学习和反馈的机制，让AI在工作流中越用越“懂你”。</div>
+    </div>
+    <div style="color:#6c63ff; font-weight:bold; margin-bottom:8px;">📡 今日关键信号</div>
+    <div style="color:#e2e8f0; margin-bottom:20px; font-size:14px; line-height:1.5;">AI竞争正从模型层“军备竞赛”下沉至应用层的“渗透率战争”。工具成本普降和智能体生态萌芽，标志着“AI原生工作流”设计能力将成为个人与组织的核心资产。未来六个月，能整合多模态、具实时学习能力的工作流将率先产生十倍级效率差异。</div>
+    <div style="color:#4a5568; font-size:12px; margin-top:16px;">✦ 5分钟读完，今日认知升级完成 · 每天一点，护城河越来越深</div>
+</div>
+</body>
+</html>
