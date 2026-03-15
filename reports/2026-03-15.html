@@ -7,70 +7,66 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; }
         body { background-color: #0f1117; color: #e2e8f0; line-height: 1.6; padding: 20px; max-width: 1200px; margin: 0 auto; }
-        .date-header { font-size: 14px; color: #94a3b8; margin-bottom: 30px; text-align: center; }
-        .section-title { font-size: 20px; font-weight: 700; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid #1e2230; }
-        .card { background: #161b27; border-radius: 12px; padding: 24px; margin-bottom: 20px; border: 1px solid #1e2230; }
+        .date-header { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: #f8fafc; }
+        .date-header span { color: #6c63ff; font-size: 16px; font-weight: 400; margin-left: 10px; }
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #1e2230; display: flex; align-items: center; }
+        .section-title::before { content: ''; display: inline-block; width: 4px; height: 20px; background-color: var(--accent-color); margin-right: 10px; border-radius: 2px; }
         .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .stat-card { text-align: center; padding: 24px 16px; }
-        .stat-label { font-size: 12px; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-        .stat-number { font-size: 36px; font-weight: 700; margin: 10px 0; }
+        .stat-card { background: #161b27; border-radius: 12px; padding: 24px; text-align: center; border-top: 4px solid var(--card-color); }
+        .stat-label { font-size: 12px; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .stat-number { font-size: 36px; font-weight: 700; color: #f8fafc; margin-bottom: 4px; }
         .stat-desc { font-size: 14px; color: #9ca3af; }
-        .news-item { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid #1e2230; }
-        .news-item:last-child { border-bottom: none; }
-        .news-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: #e2e8f0; }
+        .news-card { background: #161b27; border-radius: 12px; padding: 20px; margin-bottom: 16px; border-left: 4px solid var(--accent-color); }
+        .news-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; color: #f1f5f9; }
         .news-summary { font-size: 14px; color: #94a3b8; margin-bottom: 12px; }
         .news-source { font-size: 12px; color: #4a5568; }
-        .tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-right: 8px; margin-bottom: 8px; }
-        .tag-ai { background-color: rgba(108, 99, 255, 0.15); color: #6c63ff; }
-        .tag-blockchain { background-color: rgba(245, 158, 11, 0.15); color: #f59e0b; }
-        .tag-stock { background-color: rgba(16, 185, 129, 0.15); color: #10b981; }
-        .tag-startup { background-color: rgba(244, 63, 94, 0.15); color: #f43f5e; }
-        .tag-research { background-color: rgba(167, 139, 250, 0.15); color: #a78bfa; }
-        .insight-box { background: linear-gradient(135deg, #1a2035 0%, #161b27 100%); border-left: 4px solid #6c63ff; padding: 20px; border-radius: 0 12px 12px 0; }
-        .source-list { display: flex; flex-wrap: wrap; gap: 15px; font-size: 13px; }
-        .source-list a { color: #6c63ff; text-decoration: none; }
-        .source-list a:hover { text-decoration: underline; }
-        a { color: #6c63ff; }
-        .chart-container { margin: 20px 0; overflow-x: auto; }
-        .data-card-group { display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
-        .data-card { background: #161b27; border-radius: 10px; padding: 18px 16px; flex: 1; min-width: 130px; text-align: center; border-top: 3px solid; }
-        .comparison-table { width: 100%; border-collapse: collapse; background: #161b27; border-radius: 10px; overflow: hidden; margin: 16px 0; }
-        .comparison-table th { background: #1e2230; color: #a78bfa; font-size: 12px; padding: 10px 14px; text-align: left; }
-        .comparison-table td { color: #e2e8f0; font-size: 13px; padding: 10px 14px; border-bottom: 1px solid #1e2230; }
-        .comparison-table tr:nth-child(odd) { background: #161b27; }
-        .comparison-table tr:nth-child(even) { background: #1a2035; }
+        .news-source a { color: #6c63ff; text-decoration: none; }
+        .insight-box { background: #161b27; border-radius: 12px; padding: 24px; border-left: 4px solid #a78bfa; }
+        .link-list { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .link-list a { color: #94a3b8; font-size: 14px; text-decoration: none; padding: 6px 12px; background: #1e2230; border-radius: 6px; transition: all 0.2s; }
+        .link-list a:hover { background: #2d3748; color: #e2e8f0; }
+        .color-ai { --accent-color: #6c63ff; --card-color: #6c63ff; }
+        .color-blockchain { --accent-color: #f59e0b; --card-color: #f59e0b; }
+        .color-stock { --accent-color: #10b981; --card-color: #10b981; }
+        .color-startup { --accent-color: #f43f5e; --card-color: #f43f5e; }
+        .color-research { --accent-color: #a78bfa; --card-color: #a78bfa; }
+        .chart-container { background: #161b27; border-radius: 12px; padding: 20px; margin: 20px 0; }
     </style>
 </head>
 <body>
-    <div class="date-header">2026-03-15（星期日）· 早报版</div>
+    <div class="date-header">2026-03-15（星期日）<span>· 早报版</span></div>
 
     <!-- 板块1：今日速览 -->
-    <div class="card-grid">
-        <div class="card stat-card">
-            <div class="stat-label">BTC 价格</div>
-            <div class="stat-number" style="color: #10b981;">US$71,305</div>
-            <div class="stat-desc">24h 涨跌 +0.67%</div>
-        </div>
-        <div class="card stat-card">
-            <div class="stat-label">纳斯达克</div>
-            <div class="stat-number" style="color: #f43f5e;">-0.93%</div>
-            <div class="stat-desc">通胀担忧与科技股承压</div>
-        </div>
-        <div class="card stat-card">
-            <div class="stat-label">加密情绪指数</div>
-            <div class="stat-number" style="color: #ef4444;">15/100</div>
-            <div class="stat-desc">Extreme Fear</div>
-        </div>
-        <div class="card stat-card">
-            <div class="stat-label">今日 AI 快讯</div>
-            <div class="stat-number">5条</div>
-            <div class="stat-desc">军事AI与裁员潮</div>
+    <div class="section">
+        <div class="card-grid">
+            <div class="stat-card" style="--card-color: #f59e0b;">
+                <div class="stat-label">BTC 价格</div>
+                <div class="stat-number">US$71,289</div>
+                <div class="stat-desc" style="color: #10b981;">24h 涨跌 +0.73%</div>
+            </div>
+            <div class="stat-card" style="--card-color: #10b981;">
+                <div class="stat-label">纳斯达克</div>
+                <div class="stat-number" style="color: #ef4444;">-0.93%</div>
+                <div class="stat-desc">科技股承压，AI硬件龙头回调</div>
+            </div>
+            <div class="stat-card" style="--card-color: #f59e0b;">
+                <div class="stat-label">加密情绪指数</div>
+                <div class="stat-number" style="color: #ef4444;">15/100</div>
+                <div class="stat-desc">Extreme Fear</div>
+            </div>
+            <div class="stat-card" style="--card-color: #6c63ff;">
+                <div class="stat-label">今日 AI 快讯</div>
+                <div class="stat-number">5条</div>
+                <div class="stat-desc">军单巨擘 · 巨头瘦身</div>
+            </div>
         </div>
     </div>
 
     <!-- 板块2：市场快照 -->
-    <h2 class="section-title">市场快照</h2>
-    
+    <div class="section">
+        <div class="section-title color-stock">市场快照</div>
+        
 <section style="margin:28px 0;">
   <h2 style="font-size:20px;font-weight:700;color:#e2e8f0;margin-bottom:16px;
              padding-left:12px;border-left:4px solid #6c63ff;">市场快照</h2>
@@ -80,7 +76,7 @@
     <div style="background:#161b27;border-radius:12px;padding:20px;">
       <div style="font-size:13px;font-weight:700;color:#f59e0b;margin-bottom:12px;
                   text-transform:uppercase;letter-spacing:.5px;">加密货币</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">BTC</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$71,305&nbsp;<span style="color:#10b981;font-size:13px;">(+0.67%)</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">ETH</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$2,096&nbsp;<span style="color:#10b981;font-size:13px;">(+0.06%)</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">SOL</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$88.07&nbsp;<span style="color:#f43f5e;font-size:13px;">(-0.15%)</span></span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">BTC</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$71,289&nbsp;<span style="color:#10b981;font-size:13px;">(+0.73%)</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">ETH</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$2,094&nbsp;<span style="color:#10b981;font-size:13px;">(+0.10%)</span></span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #0f1117;"><span style="color:#94a3b8;font-size:14px;">SOL</span><span style="font-weight:600;font-size:14px;color:#e2e8f0;">US$88.07&nbsp;<span style="color:#10b981;font-size:13px;">(+0.00%)</span></span></div>
     </div>
 
     <!-- 美股指数 -->
@@ -138,176 +134,193 @@
     <a href="https://finance.yahoo.com" target="_blank" style="color:#6c63ff;text-decoration:none;">Yahoo Finance</a>（美股指数）
   </div>
 </section>
+    </div>
 
     <!-- 板块3：AI头条深度 -->
-    <h2 class="section-title">AI头条深度</h2>
-    <div class="card">
-        <span class="tag tag-ai">AI · 商业</span>
-        <h3 class="news-title">Meta 考虑裁员20%以平衡AI军备竞赛开支（Meta reportedly considering layoffs that could affect 20% of the company）</h3>
-        <p class="news-summary" style="margin-top: 12px; margin-bottom: 20px;">
-            在AI基础设施和人才争夺战白热化的2026年，一则关于Meta可能进行大规模裁员的消息，揭示了科技巨头们在“AI优先”战略下的残酷现实。为了支撑其激进的AI投资（包括基础设施、收购和人才招聘），这家社交巨头正考虑削减高达20%的员工。这不仅仅是Meta的成本控制问题，它标志着整个行业进入了一个新阶段：从“不计成本投入AI”转向“为AI投入寻找可持续资金来源”。过去几年，市场容忍了科技公司因投资未来而产生的利润下滑，但当增长故事遇到瓶颈，股东对效率的要求便会抬头。Meta的潜在裁员，可能预示着其他重仓AI的巨头（如Google、微软）也将面临类似的财务平衡压力。AI的“军备竞赛”正从纯粹的资本比拼，演变为一场关于运营效率、战略聚焦和商业化的综合较量。
-        </p>
-        <div class="chart-container">
-            <!-- 结论句：为支撑AI巨额投入，科技巨头正面临利润与增长的战略平衡压力 -->
-            <!-- 格式C：多方立场/事件对比 -->
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>科技巨头</th>
-                        <th>近期AI相关战略动作</th>
-                        <th>对应的财务/组织调整</th>
-                        <th>时间线</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Meta</td>
-                        <td>全力投资AI基础设施、Llama模型系列、AI助手整合</td>
-                        <td>考虑裁员20%，以“抵消”AI开支</td>
-                        <td>2026年3月（传闻）</td>
-                    </tr>
-                    <tr>
-                        <td>Google</td>
-                        <td>Gemini模型迭代、搜索AI化、云AI服务</td>
-                        <td>持续重组，部分团队合并，控制非核心支出</td>
-                        <td>2025年至今</td>
-                    </tr>
-                    <tr>
-                        <td>Microsoft</td>
-                        <td>Copilot全线整合、与OpenAI深度合作、自研芯片</td>
-                        <td>云业务增长放缓后，强调“效率”，部分部门冻结招聘</td>
-                        <td>2025年末</td>
-                    </tr>
-                    <tr>
-                        <td>Amazon</td>
-                        <td>Bedrock平台扩张、AI芯片Trainium2/Inferentia2、Alexa下一代</td>
-                        <td>AWS部门持续盈利，但整体零售业务进行成本优化</td>
-                        <td>进行中</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div style="font-size:11px;color:#4a5568;margin-top:8px;text-align:center;">数据来源：<a href="https://techcrunch.com/2026/03/14/meta-reportedly-considering-layoffs-that-could-affect-20-of-the-company/" target="_blank" style="color:#6c63ff;text-decoration:none;">TechCrunch</a>（2026-03-14）及公开财报</div>
+    <div class="section">
+        <div class="section-title color-ai">AI头条深度</div>
+        <div class="news-card color-ai">
+            <div class="news-title">美军豪掷200亿美金押注AI国防承包商，Anduril成最大赢家（US Army announces contract with Anduril worth up to US$20B）</div>
+            <div class="news-summary">
+                <p>美国陆军宣布与AI国防科技公司Anduril签订了一份价值高达US$200亿的“企业级”合同，整合了超过120项独立的采购行动。这笔交易不仅创下了AI军事应用领域的单笔合同纪录，更标志着美国国防采购模式正在发生根本性转变——从依赖传统军工巨头，转向拥抱由硅谷思维驱动的敏捷、软件定义的AI原生国防承包商。</p>
+                <p>这笔巨额合同的核心看点在于其“企业级”属性。它并非为某一特定武器系统买单，而是为Anduril提供的一个持续迭代的AI驱动能力平台提供资金。这包括自主无人机群、AI指挥控制系统、网络战工具以及预测性后勤维护等。陆军希望借此获得快速原型设计、软件持续升级和跨域系统互操作的能力，以应对“近乎对等”的对手。这本质上是对“移动缓慢、成本超支”的传统国防工业基础的一次“降维打击”。</p>
+                <p>Anduril的崛起路径与传统军工复合体截然不同。它由Palmer Luckey（Oculus创始人）创立，以“软件吞噬国防”为信条，采用快速开发、持续部署的互联网产品思维。其核心产品Lattice OS是一个集成了传感器数据、AI算法和自主系统的通用作战平台。此次合同意味着美军正式将未来作战体系的“操作系统”交给了这样一家成立不足十年的公司。</p>
+                <p>这一趋势将引发连锁反应：首先，传统军工巨头（如洛克希德·马丁、雷神）将面临巨大压力，被迫加速自身的数字化转型或寻求与AI初创公司合作。其次，硅谷与五角大楼的关系将更加紧密，但也可能引发关于技术伦理、AI自主杀伤权的更激烈辩论。最后，这为全球AI军事竞赛树立了新标杆，可能促使其他国家加大类似投入，加速AI军事化的全球进程。</p>
+            </div>
+            <!-- 数据可视化：对比传统军工巨头与AI国防新贵的核心差异 -->
+            <div class="chart-container">
+                <svg width="100%" viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+                    <text x="300" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#e2e8f0">AI国防新贵 vs 传统军工巨头：核心范式对比</text>
+                    <!-- Y轴标签 -->
+                    <text x="130" y="70" text-anchor="end" font-size="12" fill="#94a3b8">开发周期</text>
+                    <text x="130" y="120" text-anchor="end" font-size="12" fill="#94a3b8">成本模式</text>
+                    <text x="130" y="170" text-anchor="end" font-size="12" fill="#94a3b8">核心资产</text>
+                    <text x="130" y="220" text-anchor="end" font-size="12" fill="#94a3b8">组织文化</text>
+                    <!-- 条形图 - AI新贵 -->
+                    <g>
+                        <rect x="140" y="55" width="320" height="22" rx="4" fill="#6c63ff"/>
+                        <text x="470" y="70" font-size="12" font-weight="bold" fill="#6c63ff">月/季度迭代</text>
+                    </g>
+                    <g>
+                        <rect x="140" y="105" width="280" height="22" rx="4" fill="#6c63ff"/>
+                        <text x="430" y="120" font-size="12" font-weight="bold" fill="#6c63ff">软件订阅服务</text>
+                    </g>
+                    <g>
+                        <rect x="140" y="155" width="400" height="22" rx="4" fill="#6c63ff"/>
+                        <text x="550" y="170" font-size="12" font-weight="bold" fill="#6c63ff">AI算法与数据平台</text>
+                    </g>
+                    <g>
+                        <rect x="140" y="205" width="360" height="22" rx="4" fill="#6c63ff"/>
+                        <text x="510" y="220" font-size="12" font-weight="bold" fill="#6c63ff">硅谷产品驱动</text>
+                    </g>
+                    <!-- 条形图 - 传统巨头 -->
+                    <g>
+                        <rect x="140" y="55" width="180" height="22" rx="4" fill="#94a3b8"/>
+                        <text x="140" y="70" font-size="12" font-weight="bold" fill="#e2e8f0" dx="185">年/十年周期</text>
+                    </g>
+                    <g>
+                        <rect x="140" y="105" width="160" height="22" rx="4" fill="#94a3b8"/>
+                        <text x="140" y="120" font-size="12" font-weight="bold" fill="#e2e8f0" dx="165">硬件采购+维护</text>
+                    </g>
+                    <g>
+                        <rect x="140" y="155" width="220" height="22" rx="4" fill="#94a3b8"/>
+                        <text x="140" y="170" font-size="12" font-weight="bold" fill="#e2e8f0" dx="225">实体工厂与供应链</text>
+                    </g>
+                    <g>
+                        <rect x="140" y="205" width="200" height="22" rx="4" fill="#94a3b8"/>
+                        <text x="140" y="220" font-size="12" font-weight="bold" fill="#e2e8f0" dx="205">华盛顿关系驱动</text>
+                    </g>
+                    <!-- X轴 -->
+                    <line x1="140" y1="235" x2="580" y2="235" stroke="#4a5568" stroke-width="1"/>
+                    <text x="140" y="250" font-size="10" fill="#4a5568" text-anchor="start">传统模式</text>
+                    <text x="360" y="250" font-size="10" fill="#4a5568" text-anchor="middle">对比维度</text>
+                    <text x="580" y="250" font-size="10" fill="#4a5568" text-anchor="end">AI原生模式</text>
+                    <!-- 图例 -->
+                    <rect x="400" y="10" width="12" height="12" rx="2" fill="#6c63ff"/>
+                    <text x="418" y="18" font-size="11" fill="#94a3b8">AI国防新贵 (如 Anduril)</text>
+                    <rect x="400" y="30" width="12" height="12" rx="2" fill="#94a3b8"/>
+                    <text x="418" y="38" font-size="11" fill="#94a3b8">传统军工巨头</text>
+                </svg>
+                <div style="font-size:11px;color:#4a5568;margin-top:8px;text-align:center;">分析基于公开合同信息及行业报告 | 制图：科技日报</div>
+            </div>
+            <div class="news-source">来源：<a href="https://techcrunch.com/2026/03/14/us-army-announces-contract-with-anduril-worth-up-to-20b/" target="_blank">TechCrunch</a></div>
         </div>
     </div>
 
     <!-- 板块4：今日快讯 -->
-    <h2 class="section-title">今日快讯</h2>
-    <div class="card">
-        <div class="news-item">
-            <span class="tag tag-ai">AI</span>
-            <h4 class="news-title">美国陆军与Anduril签订价值高达US$200亿的合同</h4>
-            <p class="news-summary">美国陆军宣布与AI国防科技公司Anduril签订一份“单一企业合同”，价值可能高达US$200亿。该合同整合了超过120项独立的采购行动，标志着军事采购向大型、集成的AI驱动解决方案供应商倾斜的重大转变。</p>
-            <div class="news-source"><a href="https://techcrunch.com/2026/03/14/us-army-announces-contract-with-anduril-worth-up-to-20b/" target="_blank" style="color:#6c63ff;font-size:12px;">来源：TechCrunch</a></div>
+    <div class="section">
+        <div class="section-title" style="--accent-color: #9ca3af;">今日快讯</div>
+        <!-- AI -->
+        <div class="news-card color-ai">
+            <div class="news-title">Meta据报考虑裁员20%，为AI巨额投入“瘦身”（Meta reportedly considering layoffs that could affect 20% of the company）</div>
+            <div class="news-summary">为抵消在AI基础设施、收购及人才方面的激进开支，Facebook母公司Meta正考虑新一轮裁员，比例可能高达员工总数的20%。这标志着科技巨头在“All in AI”的同时，正面临严峻的财务平衡压力，通过结构性调整来确保长期竞争力。</div>
+            <div class="news-source">来源：<a href="https://techcrunch.com/2026/03/14/meta-reportedly-considering-layoffs-that-could-affect-20-of-the-company/" target="_blank">TechCrunch</a></div>
         </div>
-        <div class="news-item">
-            <span class="tag tag-ai">AI</span>
-            <h4 class="news-title">ChatGPT新应用集成指南发布，涵盖DoorDash、Spotify等</h4>
-            <p class="news-summary">OpenAI发布了关于如何在ChatGPT中直接使用Spotify、Canva、Figma、Expedia、DoorDash、Uber等应用集成的指南。这标志着AI助手正从纯聊天工具向聚合多种服务的操作平台演进。</p>
-            <div class="news-source"><a href="https://techcrunch.com/2026/03/14/how-to-use-the-new-chatgpt-app-integrations-including-doordash-spotify-uber-and-others/" target="_blank" style="color:#6c63ff;font-size:12px;">来源：TechCrunch</a></div>
+        <div class="news-card color-ai">
+            <div class="news-title">ChatGPT应用集成指南发布，涵盖DoorDash、Spotify等（How to use the new ChatGPT app integrations）</div>
+            <div class="news-summary">OpenAI发布官方指南，详解如何在ChatGPT内直接使用Spotify、Canva、Figma、Expedia、DoorDash、Uber等第三方应用。这标志着AI助手正从“对话工具”向“操作系统级行动中枢”演进，用户无需切换应用即可完成复杂任务。</div>
+            <div class="news-source">来源：<a href="https://techcrunch.com/2026/03/14/how-to-use-the-new-chatgpt-app-integrations-including-doordash-spotify-uber-and-others/" target="_blank">TechCrunch</a></div>
         </div>
-        <div class="news-item">
-            <span class="tag tag-blockchain">区块链</span>
-            <h4 class="news-title">以太坊基金会以US$1020万价格向BitMine出售5000枚ETH</h4>
-            <p class="news-summary">以太坊基金会执行了一笔交易，以约US$1020万的总价向Tom Lee旗下的BitMine出售了5000枚ETH。此类出售通常用于资助生态系统开发，但也时常引发市场对基金会资产管理的关注。</p>
-            <div class="news-source"><a href="https://www.coindesk.com/business/2026/03/14/ethereum-foundation-sells-5-000-ether-to-tom-lee-s-bitmine-in-usd10-2-million-deal" target="_blank" style="color:#6c63ff;font-size:12px;">来源：CoinDesk</a></div>
+        <!-- 区块链 -->
+        <div class="news-card color-blockchain">
+            <div class="news-title">以太坊基金会向Tom Lee旗下BitMine出售5000枚ETH，价值1020万美金（Ethereum Foundation sells 5,000 ether to Tom Lee's BitMine）</div>
+            <div class="news-summary">以太坊基金会以约US$1020万的价格向知名分析师Tom Lee创立的数字资产挖矿公司BitMine出售了5000枚ETH。此类出售通常用于资助生态系统开发，但也引发市场对基金会资产管理的关注。</div>
+            <div class="news-source">来源：<a href="https://www.coindesk.com/business/2026/03/14/ethereum-foundation-sells-5-000-ether-to-tom-lee-s-bitmine-in-usd10-2-million-deal" target="_blank">CoinDesk</a></div>
         </div>
-        <div class="news-item">
-            <span class="tag tag-blockchain">区块链</span>
-            <h4 class="news-title">华尔街力推代币化股票，但机构交易兴趣寥寥</h4>
-            <p class="news-summary">尽管华尔街各大机构积极推动将传统股票代币化，但报告显示机构投资者目前对交易这些代币化资产的兴趣并不高。流动性、监管清晰度和实际效用仍是主要障碍。</p>
-            <div class="news-source"><a href="https://www.coindesk.com/business/2026/03/14/wall-street-pushes-tokenized-stocks-but-institutions-aren-t-eager-to-trade-them" target="_blank" style="color:#6c63ff;font-size:12px;">来源：CoinDesk</a></div>
+        <div class="news-card color-blockchain">
+            <div class="news-title">华尔街力推代币化股票遇冷，机构交易兴趣寥寥（Wall Street pushes tokenized stocks, but institutions aren’t eager to trade them）</div>
+            <div class="news-summary">尽管华尔街大行积极布局，将传统股票代币化以寻求效率提升和新收入，但机构投资者目前交易意愿不强。监管清晰度、流动性不足以及与传统系统整合的复杂性是主要障碍。</div>
+            <div class="news-source">来源：<a href="https://www.coindesk.com/business/2026/03/14/wall-street-pushes-tokenized-stocks-but-institutions-aren-t-eager-to-trade-them" target="_blank">CoinDesk</a></div>
         </div>
-        <div class="news-item">
-            <span class="tag tag-stock">美股</span>
-            <h4 class="news-title">美元因油价飙升引发的通胀担忧而走强</h4>
-            <p class="news-summary">由于油价持续飙升重新点燃了市场对通胀的担忧，美元指数显著走强。这强化了市场对美联储将更长时间维持高利率的预期，进而对科技股等风险资产构成压力。</p>
-            <div class="news-source"><a href="https://finance.yahoo.com/news/dollar-rallies-surging-oil-prices-193420617.html" target="_blank" style="color:#6c63ff;font-size:12px;">来源：Yahoo Finance</a></div>
+        <!-- 美股 -->
+        <div class="news-card color-stock">
+            <div class="news-title">美光科技股价今日上涨，存储芯片需求预期乐观（Why Micron Stock Is Gaining Today）</div>
+            <div class="news-summary">受AI服务器对高带宽内存（HBM）需求持续强劲，以及行业库存周期改善的乐观预期推动，美光科技股价今日走高。市场看好其作为AI硬件关键供应商在2026年的增长前景。</div>
+            <div class="news-source">来源：<a href="https://finance.yahoo.com/news/why-micron-stock-gaining-today-200953904.html" target="_blank">Yahoo Finance</a></div>
         </div>
-        <div class="news-item">
-            <span class="tag tag-stock">美股</span>
-            <h4 class="news-title">美联储青睐的通胀指标保持粘性，央行或继续按兵不动</h4>
-            <p class="news-summary">最新数据显示，美联储最关注的通胀指标——核心PCE物价指数——读数依然“粘性”，超出市场预期。这几乎确定了美联储在下次会议上将维持利率不变，降息预期进一步推迟。</p>
-            <div class="news-source"><a href="https://finance.yahoo.com/news/a-sticky-reading-on-feds-favored-inflation-measure-should-keep-central-bank-on-hold-152107362.html" target="_blank" style="color:#6c63ff;font-size:12px;">来源：Yahoo Finance</a></div>
+        <div class="news-card color-stock">
+            <div class="news-title">Ulta美容股价因财报遭抛售深度超卖，是抄底时机吗？（Ulta Stock Is Deeply Oversold on Earnings Selloff）</div>
+            <div class="news-summary">美容零售商Ulta Beauty因最新季度财报不及预期，股价大幅下跌，技术指标显示已进入“深度超卖”区间。分析师正激烈辩论其疲软是周期性还是结构性，以及当前估值是否已反映足够风险。</div>
+            <div class="news-source">来源：<a href="https://finance.yahoo.com/news/ulta-stock-deeply-oversold-earnings-201532356.html" target="_blank">Yahoo Finance</a></div>
         </div>
-        <div class="news-item">
-            <span class="tag tag-startup">创业</span>
-            <h4 class="news-title">联邦监控技术将于2027年起成为新车强制标配</h4>
-            <p class="news-summary">据报道，一项新的联邦法规可能要求从2027年开始，所有新生产的汽车都必须安装某种形式的监控技术。此举旨在提升道路安全，但必然引发关于隐私和数据安全的广泛争论。</p>
-            <div class="news-source"><a href="https://www.gadgetreview.com/federal-surveillance-tech-becomes-mandatory-in-new-cars-by-2027" target="_blank" style="color:#6c63ff;font-size:12px;">来源：Gadget Review</a></div>
+        <!-- 创业 -->
+        <div class="news-card color-startup">
+            <div class="news-title">空客准备试飞两款由Kratos提供的无人作战飞机（Airbus is preparing two uncrewed combat aircraft）</div>
+            <div class="news-summary">空客宣布，正为两款由美国Kratos公司提供的无人作战飞机（UTAP-22和MQ-58）在欧洲进行首次飞行做准备。这是欧洲“未来空战系统”项目的一部分，旨在开发有人-无人机组队作战能力。</div>
+            <div class="news-source">来源：<a href="https://www.airbus.com/en/newsroom/press-releases/2026-03-airbus-is-preparing-two-uncrewed-combat-aircraft-from-kratos-for-first-flight-with-a-european" target="_blank">Airbus</a></div>
         </div>
-        <div class="news-item">
-            <span class="tag tag-startup">创业</span>
-            <h4 class="news-title">空客准备两架由Kratos提供的无人作战飞机进行首飞</h4>
-            <p class="news-summary">空中客车公司宣布，正在准备两架由美国Kratos公司提供的无人作战飞机（UCAV）在欧洲进行首次飞行测试。这是欧洲推动自主空战系统发展的重要一步。</p>
-            <div class="news-source"><a href="https://www.airbus.com/en/newsroom/press-releases/2026-03-airbus-is-preparing-two-uncrewed-combat-aircraft-from-kratos-for-first-flight-with-a-european" target="_blank" style="color:#6c63ff;font-size:12px;">来源：Airbus</a></div>
+        <div class="news-card color-startup">
+            <div class="news-title">用Rust编写的韩语编程语言“Han”亮相（Show HN: Han – A Korean programming language written in Rust）</div>
+            <div class="news-summary">开发者社区出现一个名为“Han”的新编程语言项目，其语法关键词采用韩语，旨在降低韩国初学者的编程门槛。该项目使用Rust实现，已在GitHub开源，引发关于编程语言本地化价值的讨论。</div>
+            <div class="news-source">来源：<a href="https://github.com/xodn348/han" target="_blank">GitHub</a></div>
         </div>
-        <div class="news-item">
-            <span class="tag tag-startup">创业</span>
-            <h4 class="news-title">Show HN: Han – 一款用Rust编写的韩语编程语言</h4>
-            <p class="news-summary">开发者社区出现一个新项目“Han”，这是一个用Rust编写的、语法基于韩语的编程语言。该项目旨在探索非英语编程语言的可能性，降低特定语言群体的编程入门门槛。</p>
-            <div class="news-source"><a href="https://github.com/xodn348/han" target="_blank" style="color:#6c63ff;font-size:12px;">来源：GitHub</a></div>
+        <div class="news-card color-startup">
+            <div class="news-title">内核级反作弊系统工作原理深度剖析（How Kernel Anti-Cheats Work: A Deep Dive）</div>
+            <div class="news-summary">一篇技术博客深入剖析了现代游戏（如《无畏契约》、《使命召唤》）中内核级反作弊系统（如Vanguard、Ricochet）的工作原理、权限级别及其引发的隐私与安全争议。为开发者理解此领域提供了详细参考。</div>
+            <div class="news-source">来源：<a href="https://s4dbrd.github.io/posts/how-kernel-anti-cheats-work/" target="_blank">技术博客</a></div>
         </div>
     </div>
 
     <!-- 板块5：AI研究前沿 -->
-    <h2 class="section-title">AI研究前沿</h2>
-    <div class="card">
-        <div class="news-item" style="border-left: 4px solid #a78bfa; padding-left: 20px; border-bottom: none; margin-bottom: 24px;">
-            <div style="font-size:12px; color:#a78bfa; margin-bottom: 5px;">NVIDIA</div>
-            <h4 class="news-title">Beyond Semantic Similarity: Introducing NVIDIA NeMo Retriever’s Generalizable Agentic Retrieval Pipeline</h4>
-            <p class="news-summary">英伟达发布了NeMo Retriever的“智能体化检索”流程。它超越了传统的语义相似度匹配，让检索系统能像智能体一样理解复杂查询意图、自主规划检索步骤并整合多源信息。这对构建更可靠、更强大的企业级AI助手至关重要。</p>
-            <div class="news-source"><a href="https://huggingface.co/blog/nvidia/nemo-retriever-agentic-retrieval" target="_blank" style="color:#6c63ff;font-size:12px;">来源：Hugging Face Blog</a></div>
+    <div class="section">
+        <div class="section-title color-research">AI研究前沿</div>
+        <div class="news-card color-research">
+            <div class="news-title"><span style="color:#a78bfa; font-size:12px;">NVIDIA</span> | Beyond Semantic Similarity: Introducing NVIDIA NeMo Retriever’s Generalizable Agentic Retrieval Pipeline</div>
+            <div class="news-summary">英伟达发布了NeMo Retriever的“智能体化检索”管道。它不再仅仅依赖语义相似度匹配，而是让AI智能体主动理解查询意图、规划检索步骤、并验证结果，显著提升了复杂问题下的信息检索准确率。这对构建更可靠的企业级AI助手至关重要。</div>
+            <div class="news-source">来源：<a href="https://huggingface.co/blog/nvidia/nemo-retriever-agentic-retrieval" target="_blank">Hugging Face Blog</a></div>
         </div>
-        <div class="news-item" style="border-left: 4px solid #a78bfa; padding-left: 20px; border-bottom: none; margin-bottom: 24px;">
-            <div style="font-size:12px; color:#a78bfa; margin-bottom: 5px;">BAIR (Berkeley)</div>
-            <h4 class="news-title">Identifying Interactions at Scale for LLMs</h4>
-            <p class="news-summary">加州大学伯克利分校的研究者提出了在大规模语言模型中识别“特征交互”的方法。简单说，就是搞清楚模型做决策时，是哪些词语或概念组合在一起共同起了作用。这有助于提高模型的可解释性和可控性，让“黑箱”变得更透明一些。</p>
-            <div class="news-source"><a href="http://bair.berkeley.edu/blog/2026/03/13/spex/" target="_blank" style="color:#6c63ff;font-size:12px;">来源：BAIR Blog</a></div>
+        <div class="news-card color-research">
+            <div class="news-title"><span style="color:#a78bfa; font-size:12px;">BAIR (Berkeley)</span> | Identifying Interactions at Scale for LLMs</div>
+            <div class="news-summary">伯克利AI研究所的研究旨在大规模识别和理解大语言模型内部组件之间的“交互作用”。简单说，就是弄明白模型做决策时，是哪些神经元或注意力头在“互相配合”。这有助于提高模型的可解释性和可控性，让AI的行为更透明。</div>
+            <div class="news-summary">来源：<a href="http://bair.berkeley.edu/blog/2026/03/13/spex/" target="_blank">BAIR Blog</a></div>
         </div>
-        <div class="news-item" style="border-left: 4px solid #a78bfa; padding-left: 20px; border-bottom: none;">
-            <div style="font-size:12px; color:#a78bfa; margin-bottom: 5px;">arXiv</div>
-            <h4 class="news-title">Comparison of Outlier Detection Algorithms on String Data</h4>
-            <p class="news-summary">这篇论文系统比较了不同异常检测算法在文本字符串数据上的表现。虽然异常检测在数值数据上很成熟，但对文本（如日志、用户输入）的研究较少。这项工作对需要从海量文本中自动发现异常或错误的应用（如安全、质量监控）有直接参考价值。</p>
-            <div class="news-source"><a href="https://arxiv.org/abs/2603.11049" target="_blank" style="color:#6c63ff;font-size:12px;">来源：arXiv</a></div>
+        <div class="news-card color-research">
+            <div class="news-title"><span style="color:#a78bfa; font-size:12px;">arXiv</span> | Comparison of Outlier Detection Algorithms on String Data</div>
+            <div class="news-summary">一篇新论文系统比较了多种异常检测算法在文本字符串数据上的表现。由于文本数据（如日志、用户输入）结构特殊，传统数值异常检测方法往往失效。这项研究为处理AI系统中常见的文本异常（如恶意输入、系统错误日志）提供了实用指南。</div>
+            <div class="news-source">来源：<a href="https://arxiv.org/abs/2603.11049" target="_blank">arXiv:2603.11049</a></div>
         </div>
     </div>
 
     <!-- 板块6：编辑洞察 -->
-    <h2 class="section-title">编辑洞察</h2>
-    <div class="insight-box">
-        <p>今日主线清晰呈现“成本与扩张”的二元张力。一边是Meta为AI豪赌可能付出的巨大人力成本，另一边是美国陆军用US$200亿合同将AI军事化推向新高度，揭示了AI投资的两极：对内紧缩与对外扩张并存。与此同时，通胀粘性推迟降息预期，给依赖宽松环境的科技股和加密市场同时泼了冷水。ChatGPT集成第三方应用，则展示了AI在消费层面向“超级入口”的悄然渗透。今日图谱描绘了AI产业从野蛮生长进入精算时代的转折点：钱要花在刀刃上，而刀刃正变得越来越锋利且昂贵。</p>
-    </div>
-
-    <!-- 板块7：信息来源 -->
-    <h2 class="section-title">信息来源</h2>
-    <div class="card">
-        <div class="source-list">
-            <a href="https://techcrunch.com/" target="_blank">TechCrunch</a>
-            <a href="https://www.coindesk.com/" target="_blank">CoinDesk</a>
-            <a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance</a>
-            <a href="https://www.airbus.com/" target="_blank">Airbus</a>
-            <a href="https://github.com/" target="_blank">GitHub</a>
-            <a href="https://huggingface.co/" target="_blank">Hugging Face</a>
-            <a href="http://bair.berkeley.edu/blog/" target="_blank">BAIR Blog</a>
-            <a href="https://arxiv.org/" target="_blank">arXiv</a>
-            <a href="https://www.gadgetreview.com/" target="_blank">Gadget Review</a>
+    <div class="section">
+        <div class="section-title" style="--accent-color: #6c63ff;">编辑洞察</div>
+        <div class="insight-box">
+            <p>今日主线清晰呈现“投入与收缩”的二元张力。一端是美军豪掷US$200亿与Anduril的超级合同，标志着国家级资本正以前所未有的力度押注AI原生国防范式，追求的是“降维打击”式的未来战力。另一端是Meta可能裁员20%的传闻，揭示了即便巨头也在为天价的AI基础设施开支进行“财务瘦身”，从规模扩张转向效率优先。这两条新闻共同勾勒出AI产业化的深水区特征：战略价值得到天量认可，但商业化成本已高到必须进行结构性调整。与此同时，ChatGPT加速整合第三方应用，走向“行动中枢”，而华尔街的代币化股票却遇冷，显示技术落地节奏因领域而异。今日市场情绪在“极端恐惧”与科技股回调中徘徊，反映出在宏大叙事与短期财报压力之间，市场正在重新校准预期。</p>
         </div>
     </div>
 
-    <div style="background:#1e2230; border-left:4px solid #10b981; border-radius:8px; padding:24px; margin:20px 0; font-family:system-ui,sans-serif; color:#e2e8f0">
+    <!-- 板块7：信息来源 -->
+    <div class="section">
+        <div class="section-title" style="--accent-color: #9ca3af;">信息来源</div>
+        <div class="link-list">
+            <a href="https://techcrunch.com/" target="_blank">TechCrunch</a>
+            <a href="https://www.coindesk.com/" target="_blank">CoinDesk</a>
+            <a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance</a>
+            <a href="https://www.investors.com/" target="_blank">Investor's Business Daily</a>
+            <a href="https://huggingface.co/" target="_blank">Hugging Face</a>
+            <a href="http://bair.berkeley.edu/blog/" target="_blank">BAIR Blog</a>
+            <a href="https://arxiv.org/" target="_blank">arXiv</a>
+            <a href="https://github.com/" target="_blank">GitHub</a>
+            <a href="https://www.airbus.com/" target="_blank">Airbus</a>
+        </div>
+    </div>
+
+<div style="background:#1e2230; border-left:4px solid #10b981; border-radius:8px; padding:24px; margin:20px 0; font-family:system-ui,sans-serif; color:#e2e8f0">
   <div>
-    <span style="background:#10b981; color:white; border-radius:20px; padding:4px 14px; font-size:13px;">🔁 周度复盘</span>
-    <span style="color:#94a3b8; font-size:13px; margin-left:10px;">5分钟读完 · 今日认知升级</span>
+    <span style="background:#10b981; color:white; border-radius:20px; padding:4px 14px; font-size:13px">🔁 周度复盘</span>
+    <span style="color:#94a3b8; font-size:13px; margin-left:10px">5分钟读完 · 今日认知升级</span>
   </div>
-  <div style="font-size:20px; font-weight:bold; margin:12px 0;">🏯 AI护城河·今日洞察</div>
-  <div style="line-height:1.6;">
-    <div style="margin-bottom:12px;">【智能体工作流】→ 这意味着你的AI竞争力将取决于能否将单一模型调用，升级为能自主决策、调用工具并完成复杂任务的“数字员工”编排能力。</div>
-    <div style="margin-bottom:12px;">【多模态成本骤降】→ 对你意味着：图像、视频生成与分析的门槛消失，竞争焦点转向谁能用低成本多模态能力，规模化解决特定行业问题（如质检、内容创作）。</div>
-    <div style="margin-bottom:12px;">【推理优化竞赛】→ 这要求你关注模型推理速度与成本，未来胜出的AI应用不仅是功能好，更是在用户体验（实时性）和单位经济效益上占优。</div>
-    <div style="margin-bottom:12px;">【数据飞轮壁垒】→ 对你而言，构建能持续收集用户反馈并自动优化模型的闭环系统，比单纯使用公开模型更重要，这是形成业务护城河的关键。</div>
+  <div style="font-size:20px; font-weight:bold; margin:12px 0">🏯 AI护城河·今日洞察</div>
+  <ul style="padding-left:20px; margin:16px 0; line-height:1.6">
+    <li><strong>【多模态推理】</strong> → 这意味着你的AI竞争力将不再依赖单一文本或图像模型，而是需要构建跨模态的理解与生成工作流，以解决更复杂的现实问题。</li>
+    <li><strong>【边缘智能部署】</strong> → 对你而言，掌握轻量化模型在终端设备的优化与集成能力，将成为在实时性、隐私敏感场景中建立技术壁垒的关键。</li>
+    <li><strong>【AI代理自动化】</strong> → 这要求你从“使用工具”转向“设计智能体协作系统”，通过编排多个AI代理完成端到端任务，大幅提升个人或组织的执行效率。</li>
+    <li><strong>【提示工程体系化】</strong> → 零散的提示技巧已不够用，你需要建立可复用、可评估的提示工程框架，这是规模化发挥大模型性能并保持输出稳定性的核心基础设施。</li>
+  </ul>
+  <div style="margin-top:20px;">
+    <div style="color:#10b981; font-weight:bold;">📡 今日关键信号</div>
+    <div style="margin-top:8px; color:#cbd5e1; font-size:14px;">AI竞争正从模型能力比拼转向系统级整合与工程化落地。未来6个月，拥有“多模态工作流设计”与“智能体生态搭建”能力的人，将获得显著的杠杆优势。同时，边缘AI的普及将催生一批专注于垂直场景的轻型应用创新。</div>
   </div>
-  <div style="margin-top:20px; color:#10b981; font-weight:bold;">📡 今日关键信号</div>
-  <div style="color:#cbd5e1; font-size:14px; margin-top:6px;">AI竞争正从“模型能力比拼”转向“系统效率与商业闭环”的实战。2026下半年，能证明单位经济模型健康的AI应用将获得资本青睐，而依赖烧钱换取流量的模式会加速出清。智能体即服务（AaaS）可能成为新的云服务增长点。</div>
   <div style="color:#4a5568; font-size:12px; margin-top:16px;">✦ 5分钟读完，今日认知升级完成 · 每天一点，护城河越来越深</div>
 </div>
 </body>
